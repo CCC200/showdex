@@ -11,6 +11,7 @@ import {
   type ShowdexCalcMods,
   calculate,
 } from '@smogon/calc';
+import {calculate as modCalculate} from '@smogon/calcmod';
 import { type ShowdexSettings } from '@showdex/interfaces/app';
 import { type CalcdexBattleState, type CalcdexPlayerKey, CalcdexPlayerKeys as AllPlayerKeys } from '@showdex/interfaces/calc';
 import { logger } from '@showdex/utils/debug';
@@ -207,14 +208,29 @@ export const calcSmogonMatchup = (
   );
 
   try {
-    const result = calculate(
-      dex,
-      matchup.attacker,
-      matchup.defender,
-      matchup.move,
-      smogonField,
-      showdexMods,
-    );
+    // Switch calculator for mods
+    const MOD_FORMATS = ['colorplus'];
+    let result;
+    if(MOD_FORMATS.some(f => format.includes(f))) {
+      console.log('Using modded calc!');
+      result = modCalculate(
+        dex,
+        matchup.attacker,
+        matchup.defender,
+        matchup.move,
+        smogonField,
+        showdexMods,
+      );
+    } else {
+      result = calculate(
+        dex,
+        matchup.attacker,
+        matchup.defender,
+        matchup.move,
+        smogonField,
+        showdexMods,
+      );
+    }
 
     matchup.description = parseMatchupDescription(result);
     matchup.damageRange = getMatchupRange(result);

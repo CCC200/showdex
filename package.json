@@ -84,6 +84,7 @@
     "@react-stately/toggle": "^3.6.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@smogon/calc": "^0.10.0",
+    "@smogon/calcmod": "link:./../damage-calc/calc",
     "@tippyjs/react": "^4.2.6",
     "@use-gesture/react": "^10.2.27",
     "base-64": "^1.0.0",
