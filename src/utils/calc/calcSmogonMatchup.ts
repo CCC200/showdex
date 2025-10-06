@@ -209,10 +209,9 @@ export const calcSmogonMatchup = (
 
   try {
     // Switch calculator for mods
-    const MOD_FORMATS = ['colorplus'];
+    const MOD_FORMATS = ['colorplus', 'polishedcrystal'];
     let result;
     if(MOD_FORMATS.some(f => format.includes(f))) {
-      console.log('Using modded calc!');
       result = modCalculate(
         dex,
         matchup.attacker,
