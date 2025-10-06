@@ -2027,6 +2027,10 @@
   dependencies:
     "@types/node" "^18.14.2"
 
+"@smogon/calcmod@link:../damage-calc/calc":
+  version "0.0.0"
+  uid ""
+
 "@swc/helpers@^0.5.0":
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.5.1.tgz#e9031491aa3f26bfcc974a67f48bd456c8a5357a"
