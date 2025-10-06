@@ -186,39 +186,40 @@ export const actionApi = showdownApi.injectEndpoints({
   endpoints: (build) => ({
     userLadder: build.query<ShowdownActionUserLadderInfo[], string>({
       queryFn: async (username) => {
-        if (!username) {
-          throw new Error('No valid username was provided.');
-        }
+        throw new Error('Cannot access ladder rank.');
+        // if (!username) {
+        //   throw new Error('No valid username was provided.');
+        // }
 
-        const response = await runtimeFetch([
-          env('showdown-client-base-url'), // e.g., 'https://play.pokemonshowdown.com'
-          env('showdown-client-action-path'), // e.g., '/~~showdown/action.php'
-          '?',
-          qs.stringify({
-            act: 'ladderget',
-            user: username,
-          }),
-        ].join(''), {
-          method: HttpMethod.GET,
-          headers: {
-            Accept: 'text/plain',
-          },
-        });
+        // const response = await runtimeFetch([
+        //   env('showdown-client-base-url'), // e.g., 'https://play.pokemonshowdown.com'
+        //   env('showdown-client-action-path'), // e.g., '/~~showdown/action.php'
+        //   '?',
+        //   qs.stringify({
+        //     act: 'ladderget',
+        //     user: username,
+        //   }),
+        // ].join(''), {
+        //   method: HttpMethod.GET,
+        //   headers: {
+        //     Accept: 'text/plain',
+        //   },
+        // });
 
-        // this API has malformed JSON lul
-        let text = response.text();
+        // // this API has malformed JSON lul
+        // let text = response.text();
 
-        if (text?.startsWith?.(']')) {
-          text = text.slice(1);
-        }
+        // if (text?.startsWith?.(']')) {
+        //   text = text.slice(1);
+        // }
 
-        // format as JSON
-        const data = safeJsonParse<ShowdownActionUserLadderInfo[]>(text)?.map((info) => ({
-          ...info,
-          id: `${info?.entryid || '?'}:${info?.formatid || '?'}:${info?.entryid || '?'}`,
-        }));
+        // // format as JSON
+        // const data = safeJsonParse<ShowdownActionUserLadderInfo[]>(text)?.map((info) => ({
+        //   ...info,
+        //   id: `${info?.entryid || '?'}:${info?.formatid || '?'}:${info?.entryid || '?'}`,
+        // }));
 
-        return { data };
+        // return { data };
       },
 
       providesTags: createTagProvider(ShowdownReduxTagType.Ladder),
